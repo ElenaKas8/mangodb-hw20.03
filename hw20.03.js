@@ -15,6 +15,6 @@ db.articles.find({tags: {$all: ["spring", "joy"]}}, {title: 1, _id: 0})
 db.articles.updateMany({}, {$pull: {tags: {$in: ["test1", "test2"]}}})
  
 // 4. Добавить к статьям с тегом spring тег awesome и поле is_checked со значением true
+// arguments->filter->action
 
-
-db.articles.updateMany({tags: "spring"}, {$push: {tags: "awesome", is_checked: true}})
+db.articles.updateMany({tags: "spring"}, {$set: {is_checked: true, tags: {$addtoSet: ["awesome"]}}})
